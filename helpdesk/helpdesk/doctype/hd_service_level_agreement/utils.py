@@ -24,7 +24,7 @@ def get_sla(ticket: Document) -> Document:
         frappe.qb.from_(QBSla)
         .select(QBSla.name, QBSla.condition)
         .where(QBSla.enabled == 1)
-        .where(QBSla.default_sla == False)
+        .where(QBSla.default_sla == 0)
         .where(Criterion.any([QBSla.start_date.isnull(), QBSla.start_date <= now]))
         .where(Criterion.any([QBSla.end_date.isnull(), QBSla.end_date >= now]))
     )
