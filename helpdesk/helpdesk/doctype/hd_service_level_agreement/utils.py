@@ -53,7 +53,7 @@ def get_default() -> Document:
     return frappe.get_last_doc(
         DOCTYPE,
         filters={
-            "enabled": True,
-            "default_sla": True,
+            "enabled": 1,
+            "default_sla": 1,
         },
     )
