@@ -215,7 +215,7 @@ def get_list_data(
 
 @frappe.whitelist()
 @redis_cache()
-def get_filterable_fields(doctype: str, show_customer_portal_fields=False):
+def get_filterable_fields(doctype: str, show_customer_portal_fields=0):
     check_permissions(doctype, None)
     QBDocField = frappe.qb.DocType("DocField")
     QBCustomField = frappe.qb.DocType("Custom Field")
@@ -257,7 +257,7 @@ def get_filterable_fields(doctype: str, show_customer_portal_fields=False):
             QBDocField.options,
         )
         .where(QBDocField.parent == doctype)
-        .where(QBDocField.hidden == False)
+        .where(QBDocField.hidden == 0)
         .where(Criterion.any([QBDocField.fieldtype == i for i in allowed_fieldtypes]))
     )
 
@@ -271,7 +271,7 @@ def get_filterable_fields(doctype: str, show_customer_portal_fields=False):
             QBCustomField.options,
         )
         .where(QBCustomField.dt == doctype)
-        .where(QBCustomField.hidden == False)
+        .where(QBCustomField.hidden == 0)
         .where(
             Criterion.any([QBCustomField.fieldtype == i for i in allowed_fieldtypes])
         )
