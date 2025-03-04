@@ -9,7 +9,7 @@ class HDFormScript(Document):
     pass
 
 
-def get_form_script(dt, apply_to="Form", is_customer_portal=False):
+def get_form_script(dt, apply_to="Form", is_customer_portal=0):
     """Returns the form script for the given doctype"""
     FormScript = frappe.qb.DocType("HD Form Script")
     query = (
