@@ -4,6 +4,8 @@ from typing import Literal
 import frappe
 from frappe import _
 from frappe.model.document import Document
+from datetime import datetime, time
+from frappe.utils import get_datetime, getdate, add_to_date, time_diff_in_seconds
 from frappe.utils import (
     add_to_date,
     cint,
@@ -266,9 +268,15 @@ class HDServiceLevelAgreement(Document):
                 continue
             today_workday = workdays[today_weekday]
             now_in_seconds = time_diff_in_seconds(today, today_day)
-            start_time = max(today_workday.start_time.total_seconds(), now_in_seconds)
+            start_datetime = datetime.combine(today_day, today_workday.start_time)
+            end_datetime = datetime.combine(today_day, today_workday.end_time)
+            start_time_in_seconds = (start_datetime - start_datetime.replace(hour=0, minute=0, second=0)).total_seconds()
+            end_time_in_seconds = (end_datetime - end_datetime.replace(hour=0, minute=0, second=0)).total_seconds()
+            #start_time = max(today_workday.start_time.total_seconds(), now_in_seconds)
+            start_time = max(start_time_in_seconds, now_in_seconds)
             till_start_time = max(start_time - now_in_seconds, 0)
-            end_time = max(today_workday.end_time.total_seconds(), now_in_seconds)
+            end_time = max(end_time_in_seconds, now_in_seconds)
+            #end_time = max(today_workday.end_time.total_seconds(), now_in_seconds)
             time_left = max(end_time - start_time, 0)
             if not time_left:
                 res = getdate(add_to_date(res, days=1, as_datetime=True))
