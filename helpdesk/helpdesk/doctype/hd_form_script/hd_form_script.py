@@ -18,7 +18,7 @@ def get_form_script(dt, apply_to="Form", is_customer_portal=0):
         .where(FormScript.dt == dt)
         .where(FormScript.apply_to == apply_to)
         .where(FormScript.enabled == 1)
-        .where(FormScript.apply_to_customer_portal == is_customer_portal)
+        .where(FormScript.apply_to_customer_portal == frappe.db.cast(is_customer_portal, 'smallint') )
     )
 
     doc = query.run(as_dict=True)
