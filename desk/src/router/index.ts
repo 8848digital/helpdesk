@@ -10,6 +10,7 @@ export const CUSTOMER_PORTAL_TICKET = "TicketCustomer";
 
 export const AGENT_PORTAL_AGENT_LIST = "AgentList";
 export const AGENT_PORTAL_CONTACT_LIST = "ContactList";
+export const AGENT_PORTAL_SUPPLIER_LIST = "SupplierList";
 export const AGENT_PORTAL_CUSTOMER_LIST = "CustomerList";
 export const AGENT_PORTAL_ESCALATION_RULE_LIST = "EscalationRules";
 export const AGENT_PORTAL_TEAM_LIST = "Teams";
@@ -169,6 +170,11 @@ const routes = [
         path: "customers",
         name: AGENT_PORTAL_CUSTOMER_LIST,
         component: () => import("@/pages/desk/customer/Customers.vue"),
+      },
+      {
+        path: "supplier",
+        name: AGENT_PORTAL_SUPPLIER_LIST,
+        component: () => import("@/pages/desk/supplier/Supplier.vue"),
       },
       {
         path: "contacts",
