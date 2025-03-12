@@ -142,3 +142,14 @@ def get_context(d: Document) -> dict:
         "doc": d.as_dict(),
         "frappe": frappe._dict(utils=utils),
     }
+
+def success_response(data=None, id=None):
+	response = {"msg": "success"}
+	response["data"] = data
+	if id:
+		response["data"] = {"id": id, "name": id}
+	return response
+
+
+def error_response(err_msg):
+	return {"msg": "error", "error": err_msg}

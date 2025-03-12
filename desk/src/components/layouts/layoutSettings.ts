@@ -9,6 +9,7 @@ import {
   AGENT_PORTAL_AGENT_LIST,
   AGENT_PORTAL_CONTACT_LIST,
   AGENT_PORTAL_CUSTOMER_LIST,
+  AGENT_PORTAL_SUPPLIER_LIST,
   AGENT_PORTAL_TEAM_LIST,
   AGENT_PORTAL_TICKET_LIST,
   AGENT_PORTAL_KNOWLEDGE_BASE,
@@ -44,6 +45,11 @@ export const agentPortalSidebarOptions = [
     label: "Customers",
     icon: OrganizationsIcon,
     to: AGENT_PORTAL_CUSTOMER_LIST,
+  },
+  {
+    label: "Supplier",
+    icon: LucideUser,
+    to: AGENT_PORTAL_SUPPLIER_LIST,
   },
   {
     label: "Contacts",
