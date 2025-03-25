@@ -302,10 +302,11 @@ class HDServiceLevelAgreement(Document):
     def is_working_time(self, date_time, working_hours):
         day_of_week = get_weekdays()[date_time.weekday()]
         start_time, end_time = working_hours.get(day_of_week, (0, 0))
-        date_time = timedelta(
-            hours=date_time.hour, minutes=date_time.minute, seconds=date_time.second
-        )
-        return start_time <= date_time < end_time
+        # date_time = timedelta(
+        #     hours=date_time.hour, minutes=date_time.minute, seconds=date_time.second
+        # )
+        current_time = date_time.time()
+        return start_time <= current_time < end_time
 
     def calc_elapsed_time(self, start_time, end_time) -> float:
         """
